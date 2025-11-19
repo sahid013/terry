@@ -87,7 +87,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold"
+          className="w-full bg-[#141414] hover:bg-[#25CF7A] text-white font-semibold transition-colors duration-300"
           disabled={isLoading}
         >
           {isLoading ? "Processing..." : "Subscribe"}
