@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Input } from "@/components/ui";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -8,6 +8,35 @@ import { cn } from "@/lib/utils";
 interface SubscriptionFormProps {
   className?: string;
 }
+
+const translations = {
+  en: {
+    email: "Email",
+    company: "Company",
+    firstName: "First name",
+    lastName: "Last name",
+    jobTitle: "Job title",
+    agreeText: "I would like to receive Terry email updates about important related news and other ways to continue my climate journey. This includes our monthly newsletter.*",
+    unsubscribeText: "You can unsubscribe later at any time.",
+    submitButton: "Subscribe",
+    processing: "Processing...",
+    successMessage: "Successfully subscribed!",
+    errorMessage: "Failed to subscribe. Please try again.",
+  },
+  nl: {
+    email: "E-mail",
+    company: "Bedrijf",
+    firstName: "Voornaam",
+    lastName: "Achternaam",
+    jobTitle: "Functietitel",
+    agreeText: "Ik wil graag Terry e-mailupdates ontvangen over belangrijk gerelateerd nieuws en andere manieren om mijn klimaatreis voort te zetten. Dit omvat onze maandelijkse nieuwsbrief.*",
+    unsubscribeText: "U kunt zich later op elk moment afmelden.",
+    submitButton: "Abonneren",
+    processing: "Verwerken...",
+    successMessage: "Succesvol geabonneerd!",
+    errorMessage: "Abonneren mislukt. Probeer het opnieuw.",
+  },
+};
 
 /**
  * Subscription form component for OneSignal integration
@@ -21,10 +50,30 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   const [jobTitle, setJobTitle] = useState("");
   const [agreeToUpdates, setAgreeToUpdates] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [language, setLanguage] = useState<"en" | "nl">("en");
   const [message, setMessage] = useState<{
     type: "success" | "error";
     text: string;
   } | null>(null);
+
+  // Detect language from parent URL when embedded in iframe
+  useEffect(() => {
+    try {
+      // Check if embedded in iframe
+      if (window.self !== window.top) {
+        // Get parent URL from document.referrer
+        const referrer = document.referrer;
+        if (referrer && referrer.includes("/nl")) {
+          setLanguage("nl");
+        }
+      }
+    } catch (error) {
+      // Cross-origin restriction, fallback to default language
+      console.log("Could not detect parent URL");
+    }
+  }, []);
+
+  const t = translations[language];
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +94,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
       if (data.success) {
         setMessage({
           type: "success",
-          text: data.message || "Successfully subscribed!",
+          text: data.message || t.successMessage,
         });
         setEmail("");
         setFirstName("");
@@ -56,13 +105,13 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
       } else {
         setMessage({
           type: "error",
-          text: data.message || "Failed to subscribe. Please try again.",
+          text: data.message || t.errorMessage,
         });
       }
     } catch (error) {
       setMessage({
         type: "error",
-        text: "Something went wrong. Please try again.",
+        text: t.errorMessage,
       });
     } finally {
       setIsLoading(false);
@@ -75,7 +124,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1">
             <label htmlFor="email" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-              Email *
+              {t.email} *
             </label>
             <Input
               id="email"
@@ -88,7 +137,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           </div>
           <div className="flex-1">
             <label htmlFor="company" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-              Company
+              {t.company}
             </label>
             <Input
               id="company"
@@ -102,7 +151,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1">
             <label htmlFor="firstName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-              First name *
+              {t.firstName} *
             </label>
             <Input
               id="firstName"
@@ -115,7 +164,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           </div>
           <div className="flex-1">
             <label htmlFor="lastName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-              Last name *
+              {t.lastName} *
             </label>
             <Input
               id="lastName"
@@ -129,7 +178,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
         </div>
         <div>
           <label htmlFor="jobTitle" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
-            Job title
+            {t.jobTitle}
           </label>
           <Input
             id="jobTitle"
@@ -151,12 +200,12 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               className="mt-1 w-4 h-4 border-gray-300 rounded focus:ring-2 focus:ring-[#25CF7A] accent-[#25CF7A]"
             />
             <label htmlFor="agreeToUpdates" className="text-sm text-gray-700 dark:text-gray-300">
-              I would like to receive Terry email updates about important related news and other ways to continue my climate journey. This includes our monthly newsletter.*
+              {t.agreeText}
             </label>
           </div>
 
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-            You can unsubscribe later at any time.
+            {t.unsubscribeText}
           </p>
         </div>
 
@@ -168,7 +217,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
             className="px-8 bg-[#141414] hover:bg-[#25CF7A] text-white font-semibold transition-colors duration-300"
             disabled={isLoading}
           >
-            {isLoading ? "Processing..." : "Subscribe"}
+            {isLoading ? t.processing : t.submitButton}
           </Button>
         </div>
 
