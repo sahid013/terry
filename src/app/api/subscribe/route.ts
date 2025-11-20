@@ -8,7 +8,7 @@ import { subscribeUser } from "@/lib/onesignal";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, name } = body;
+    const { email, firstName, lastName, company, jobTitle } = body;
 
     // Validate input
     if (!email || !email.includes("@")) {
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Subscribe user to OneSignal
-    const result = await subscribeUser({ email, name });
+    const result = await subscribeUser({ email, firstName, lastName, company, jobTitle });
 
     if (result.success) {
       return NextResponse.json(

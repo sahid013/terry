@@ -15,7 +15,10 @@
 
 interface SubscribeUserParams {
   email: string;
-  name?: string;
+  firstName?: string;
+  lastName?: string;
+  company?: string;
+  jobTitle?: string;
 }
 
 interface OneSignalResponse {
@@ -26,13 +29,13 @@ interface OneSignalResponse {
 
 /**
  * Subscribe a user to OneSignal push notifications
- * @param params - User subscription data (email, name)
+ * @param params - User subscription data (email, firstName, lastName, company, jobTitle)
  * @returns Promise with subscription result
  */
 export async function subscribeUser(
   params: SubscribeUserParams
 ): Promise<OneSignalResponse> {
-  const { email, name } = params;
+  const { email, firstName, lastName, company, jobTitle } = params;
 
   // Check if environment variables are configured
   const appId = process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID;
@@ -59,7 +62,10 @@ export async function subscribeUser(
         device_type: 11, // Email device type
         identifier: email,
         tags: {
-          name: name || "",
+          first_name: firstName || "",
+          last_name: lastName || "",
+          company: company || "",
+          job_title: jobTitle || "",
           subscribed_via: "website_form",
           subscription_date: new Date().toISOString(),
         },
