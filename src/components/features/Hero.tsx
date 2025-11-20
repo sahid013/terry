@@ -17,7 +17,7 @@ export default function Hero({ title, subtitle, showForm = false, className }: H
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-6 text-center",
+        "flex flex-col items-center justify-center gap-6 text-center w-full",
         className
       )}
     >
@@ -32,7 +32,7 @@ export default function Hero({ title, subtitle, showForm = false, className }: H
         </p>
       )}
       {showForm && (
-        <div className="mt-4">
+        <div className="w-full p-0">
           <SubscriptionForm />
         </div>
       )}

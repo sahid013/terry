@@ -62,7 +62,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   };
 
   return (
-    <div className={cn("w-full max-w-md", className)}>
+    <div className={cn("w-full", className)}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col gap-3">
           <Input
