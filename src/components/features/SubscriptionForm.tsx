@@ -73,47 +73,72 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
     <div className={cn("w-full", className)}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col md:flex-row gap-3">
-          <Input
-            type="email"
-            placeholder="Your email address *"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="bg-white dark:bg-gray-800"
-          />
-          <Input
-            type="text"
-            placeholder="Company"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            className="bg-white dark:bg-gray-800"
-          />
+          <div className="flex-1">
+            <label htmlFor="email" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+              Email *
+            </label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="bg-white dark:bg-gray-800"
+            />
+          </div>
+          <div className="flex-1">
+            <label htmlFor="company" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+              Company
+            </label>
+            <Input
+              id="company"
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              className="bg-white dark:bg-gray-800"
+            />
+          </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex-1">
+            <label htmlFor="firstName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+              First name *
+            </label>
+            <Input
+              id="firstName"
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className="bg-white dark:bg-gray-800"
+            />
+          </div>
+          <div className="flex-1">
+            <label htmlFor="lastName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+              Last name *
+            </label>
+            <Input
+              id="lastName"
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className="bg-white dark:bg-gray-800"
+            />
+          </div>
+        </div>
+        <div>
+          <label htmlFor="jobTitle" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+            Job title
+          </label>
           <Input
+            id="jobTitle"
             type="text"
-            placeholder="First name *"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-            className="bg-white dark:bg-gray-800"
-          />
-          <Input
-            type="text"
-            placeholder="Last name *"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
+            value={jobTitle}
+            onChange={(e) => setJobTitle(e.target.value)}
             className="bg-white dark:bg-gray-800"
           />
         </div>
-        <Input
-          type="text"
-          placeholder="Job title"
-          value={jobTitle}
-          onChange={(e) => setJobTitle(e.target.value)}
-          className="bg-white dark:bg-gray-800"
-        />
 
         <div className="space-y-3 py-2">
           <div className="flex items-start gap-2 justify-center">
@@ -135,15 +160,17 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           </p>
         </div>
 
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          className="w-full bg-[#141414] hover:bg-[#25CF7A] text-white font-semibold transition-colors duration-300"
-          disabled={isLoading}
-        >
-          {isLoading ? "Processing..." : "Subscribe"}
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="px-8 bg-[#141414] hover:bg-[#25CF7A] text-white font-semibold transition-colors duration-300"
+            disabled={isLoading}
+          >
+            {isLoading ? "Processing..." : "Subscribe"}
+          </Button>
+        </div>
 
         {message && (
           <div
