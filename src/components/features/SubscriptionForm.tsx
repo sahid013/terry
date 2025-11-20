@@ -19,6 +19,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+  const [agreeToUpdates, setAgreeToUpdates] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{
     type: "success" | "error";
@@ -51,6 +52,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
         setLastName("");
         setCompany("");
         setJobTitle("");
+        setAgreeToUpdates(false);
       } else {
         setMessage({
           type: "error",
@@ -113,6 +115,30 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           className="bg-white dark:bg-gray-800"
         />
 
+        <div className="space-y-3 py-2">
+          <div className="flex items-start gap-2 justify-center">
+            <input
+              type="checkbox"
+              id="agreeToUpdates"
+              checked={agreeToUpdates}
+              onChange={(e) => setAgreeToUpdates(e.target.checked)}
+              required
+              className="mt-1 w-4 h-4 border-gray-300 rounded focus:ring-2 focus:ring-[#25CF7A] accent-[#25CF7A]"
+            />
+            <label htmlFor="agreeToUpdates" className="text-sm text-gray-700 dark:text-gray-300">
+              I would like to receive Terry email updates about important related news and other ways to continue my climate journey. This includes our monthly newsletter.*
+            </label>
+          </div>
+
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+            You can unsubscribe later at any time.
+          </p>
+
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+            By clicking submit below, you agree to the Terry <a href="https://www.terry.earth/terms-of-use" className="underline hover:text-[#25CF7A] transition-colors">Terms of use</a> and <a href="https://www.terry.earth/privacy" className="underline hover:text-[#25CF7A] transition-colors">Privacy Statement</a>
+          </p>
+        </div>
+
         <Button
           type="submit"
           variant="primary"
@@ -136,10 +162,6 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           </div>
         )}
       </form>
-
-      <p className="mt-4 text-xs text-gray-500 dark:text-gray-400 text-center">
-        By subscribing, you agree to receive notifications and updates.
-      </p>
     </div>
   );
 }
