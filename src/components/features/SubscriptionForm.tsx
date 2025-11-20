@@ -15,7 +15,10 @@ interface SubscriptionFormProps {
  */
 export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{
     type: "success" | "error";
@@ -33,7 +36,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({ email, firstName, lastName, company, jobTitle }),
       });
 
       const data = await response.json();
@@ -44,7 +47,10 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           text: data.message || "Successfully subscribed!",
         });
         setEmail("");
-        setName("");
+        setFirstName("");
+        setLastName("");
+        setCompany("");
+        setJobTitle("");
       } else {
         setMessage({
           type: "error",
@@ -64,24 +70,48 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   return (
     <div className={cn("w-full", className)}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col gap-3">
-          <Input
-            type="text"
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="bg-white dark:bg-gray-800"
-          />
+        <div className="flex gap-3">
           <Input
             type="email"
-            placeholder="Your email address"
+            placeholder="Your email address *"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             className="bg-white dark:bg-gray-800"
           />
+          <Input
+            type="text"
+            placeholder="Company"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            className="bg-white dark:bg-gray-800"
+          />
         </div>
+        <div className="flex gap-3">
+          <Input
+            type="text"
+            placeholder="First name *"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            className="bg-white dark:bg-gray-800"
+          />
+          <Input
+            type="text"
+            placeholder="Last name *"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            className="bg-white dark:bg-gray-800"
+          />
+        </div>
+        <Input
+          type="text"
+          placeholder="Job title"
+          value={jobTitle}
+          onChange={(e) => setJobTitle(e.target.value)}
+          className="bg-white dark:bg-gray-800"
+        />
 
         <Button
           type="submit"
