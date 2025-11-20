@@ -133,10 +133,6 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
             You can unsubscribe later at any time.
           </p>
-
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-            By clicking submit below, you agree to the Terry <a href="https://www.terry.earth/terms-of-use" className="underline hover:text-[#25CF7A] transition-colors">Terms of use</a> and <a href="https://www.terry.earth/privacy" className="underline hover:text-[#25CF7A] transition-colors">Privacy Statement</a>
-          </p>
         </div>
 
         <Button
