@@ -72,7 +72,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
   return (
     <div className={cn("w-full", className)}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex gap-3">
+        <div className="flex flex-col md:flex-row gap-3">
           <Input
             type="email"
             placeholder="Your email address *"
@@ -89,7 +89,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
             className="bg-white dark:bg-gray-800"
           />
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-col md:flex-row gap-3">
           <Input
             type="text"
             placeholder="First name *"
