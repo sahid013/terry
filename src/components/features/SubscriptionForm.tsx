@@ -56,10 +56,19 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
     text: string;
   } | null>(null);
 
-  // Detect language from parent URL when embedded in iframe
+  // Detect language from URL parameter or parent URL when embedded in iframe
   useEffect(() => {
     try {
-      // Check if embedded in iframe
+      // First, check URL parameter (?lang=nl)
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get('lang');
+
+      if (langParam === 'nl') {
+        setLanguage("nl");
+        return;
+      }
+
+      // Fallback: Check if embedded in iframe and detect from referrer
       if (window.self !== window.top) {
         // Get parent URL from document.referrer
         const referrer = document.referrer;
@@ -69,7 +78,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
       }
     } catch (error) {
       // Cross-origin restriction, fallback to default language
-      console.log("Could not detect parent URL");
+      console.log("Could not detect language");
     }
   }, []);
 
