@@ -77,7 +77,7 @@ export async function subscribeUser(
     if (response.ok) {
       return {
         success: true,
-        message: "Successfully subscribed to notifications!",
+        message: "Thanks for joining the Terry community! Real change starts with small actions.",
         playerId: data.id,
       };
     } else {
