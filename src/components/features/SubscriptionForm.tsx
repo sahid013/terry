@@ -132,7 +132,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1">
-            <label htmlFor="email" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="email" className="block text-left text-[15px] font-bold text-gray-700 mb-1">
               {t.email} *
             </label>
             <Input
@@ -141,11 +141,11 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="bg-white dark:bg-gray-800"
+              className="bg-white"
             />
           </div>
           <div className="flex-1">
-            <label htmlFor="company" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="company" className="block text-left text-[15px] font-bold text-gray-700 mb-1">
               {t.company}
             </label>
             <Input
@@ -153,13 +153,13 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               type="text"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="bg-white dark:bg-gray-800"
+              className="bg-white"
             />
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1">
-            <label htmlFor="firstName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="firstName" className="block text-left text-[15px] font-bold text-gray-700 mb-1">
               {t.firstName} *
             </label>
             <Input
@@ -168,11 +168,11 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
-              className="bg-white dark:bg-gray-800"
+              className="bg-white"
             />
           </div>
           <div className="flex-1">
-            <label htmlFor="lastName" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+            <label htmlFor="lastName" className="block text-left text-[15px] font-bold text-gray-700 mb-1">
               {t.lastName} *
             </label>
             <Input
@@ -181,12 +181,12 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
-              className="bg-white dark:bg-gray-800"
+              className="bg-white"
             />
           </div>
         </div>
         <div>
-          <label htmlFor="jobTitle" className="block text-left text-[15px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+          <label htmlFor="jobTitle" className="block text-left text-[15px] font-bold text-gray-700 mb-1">
             {t.jobTitle}
           </label>
           <Input
@@ -194,7 +194,7 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
             type="text"
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
-            className="bg-white dark:bg-gray-800"
+            className="bg-white"
           />
         </div>
 
@@ -208,12 +208,12 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
               required
               className="mt-1 w-4 h-4 border-gray-300 rounded focus:ring-2 focus:ring-[#25CF7A] accent-[#25CF7A]"
             />
-            <label htmlFor="agreeToUpdates" className="text-sm text-gray-700 dark:text-gray-300">
+            <label htmlFor="agreeToUpdates" className="text-sm text-gray-700">
               {t.agreeText}
             </label>
           </div>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+          <p className="text-sm text-gray-600 text-center">
             {t.unsubscribeText}
           </p>
         </div>
@@ -235,8 +235,8 @@ export default function SubscriptionForm({ className }: SubscriptionFormProps) {
             className={cn(
               "p-3 rounded-lg text-sm",
               message.type === "success"
-                ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
             )}
           >
             {message.text}
