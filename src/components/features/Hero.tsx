@@ -17,7 +17,7 @@ export default function Hero({ title, subtitle, showForm = false, className }: H
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-6 text-center w-full",
+        "flex flex-col items-center justify-start gap-6 text-center w-full",
         className
       )}
     >
