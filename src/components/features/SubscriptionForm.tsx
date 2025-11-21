@@ -20,7 +20,7 @@ const translations = {
     unsubscribeText: "You can unsubscribe later at any time.",
     submitButton: "Subscribe",
     processing: "Processing...",
-    successMessage: "Successfully subscribed!",
+    successMessage: "Thanks for joining the Terry community! Real change starts with small actions.",
     errorMessage: "Failed to subscribe. Please try again.",
   },
   nl: {
@@ -33,7 +33,7 @@ const translations = {
     unsubscribeText: "U kunt zich later op elk moment afmelden.",
     submitButton: "Abonneren",
     processing: "Verwerken...",
-    successMessage: "Succesvol geabonneerd!",
+    successMessage: "Bedankt voor het aansluiten bij de Terry-community! Echte verandering begint met kleine acties.",
     errorMessage: "Abonneren mislukt. Probeer het opnieuw.",
   },
 };
